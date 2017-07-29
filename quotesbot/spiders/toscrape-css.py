@@ -18,5 +18,7 @@ class ToScrapeCSSSpider(scrapy.Spider):
 
         next_page_url = response.css("li.next > a::attr(href)").extract_first()
         if next_page_url is not None:
-            yield scrapy.Request(response.urljoin(next_page_url))
+            yield scrapy.Request(response.urljoin(next_page_url),
+                                 meta={'mymeta': {'np': next_page_url,
+                                                  'quote': quote}})
 
